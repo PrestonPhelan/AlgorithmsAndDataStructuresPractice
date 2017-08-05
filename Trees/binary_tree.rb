@@ -8,6 +8,10 @@ class BinTree < Tree
   def traversePreOrder
     @root.traversePreOrder
   end
+
+  def traversePostOrder
+    @root.traversePostOrder
+  end
 end
 
 class BinTreeNode < TreeNode
@@ -29,6 +33,12 @@ class BinTreeNode < TreeNode
     self.visit
     @left_child.traversePreOrder if @left_child
     @right_child.traversePreOrder if @right_child
+  end
+
+  def traversePostOrder
+    @left_child.traversePreOrder if @left_child
+    @right_child.traversePostOrder if @right_child
+    self.visit
   end
 
   def visit
