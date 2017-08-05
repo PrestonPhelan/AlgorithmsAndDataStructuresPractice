@@ -8,8 +8,7 @@ class Tree
 end
 
 class TreeNode
-  attr_accessor :parent, :children
-  attr_reader :value
+  attr_accessor :parent, :children, :value
 
   def initialize(value, parent = nil, children = [])
     @value = value
