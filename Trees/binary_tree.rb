@@ -1,16 +1,16 @@
 require('tree')
 
 class BinTree < Tree
-  def traverseInOrder
-    @root.traverseInOrder
+  def traverse_in_order
+    @root.traverse_in_order
   end
 
-  def traversePreOrder
-    @root.traversePreOrder
+  def traverse_pre_order
+    @root.traverse_pre_order
   end
 
-  def traversePostOrder
-    @root.traversePostOrder
+  def traverse_post_order
+    @root.traverse_post_order
   end
 end
 
@@ -23,21 +23,21 @@ class BinTreeNode < TreeNode
     @right_child = children.last
   end
 
-  def traverseInOrder
-    @left_child.traverseInOrder if @left_child
+  def traverse_in_order
+    @left_child.traverse_in_order if @left_child
     self.visit
-    @right_child.traverseInOrder if @right_child
+    @right_child.traverse_in_order if @right_child
   end
 
-  def traversePreOrder
+  def traverse_pre_order
     self.visit
-    @left_child.traversePreOrder if @left_child
-    @right_child.traversePreOrder if @right_child
+    @left_child.traverse_pre_order if @left_child
+    @right_child.traverse_pre_order if @right_child
   end
 
-  def traversePostOrder
-    @left_child.traversePreOrder if @left_child
-    @right_child.traversePostOrder if @right_child
+  def traverse_post_order
+    @left_child.traverse_post_order if @left_child
+    @right_child.traverse_post_order if @right_child
     self.visit
   end
 
