@@ -7,8 +7,8 @@ def merge_sort(array, &prc)
   prc ||= Proc.new { |el1, el2| el1 - el2 }
 
   mid_idx = array.length / 2
-  sorted_left = merge_sort(array[0...mid_idx], prc)
-  sorted_right = merge_sort(array[mid_idx..-1], prc)
+  sorted_left = merge_sort(array[0...mid_idx], &prc)
+  sorted_right = merge_sort(array[mid_idx..-1], &prc)
 
   sorted = []
   until sorted_left.empty? || sorted_right.empty?
