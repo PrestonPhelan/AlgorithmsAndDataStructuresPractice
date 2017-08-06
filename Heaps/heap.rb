@@ -38,9 +38,11 @@ class Heap
   def size
     @heap.size
   end
-end
 
-class MinHeap < Heap
+  def trim
+    @heap.pop
+  end
+
   def insert(value)
     # Place value at end of heap
     @heap << value
@@ -49,21 +51,22 @@ class MinHeap < Heap
     bubble_up(size - 1)
   end
 
-  def extract_min
+  def extract
     # Switch root with last element
     @heap[0], @heap[-1] = @heap[-1], @heap[0]
 
     # Store and delete former root (the minimum)
-    minimum = trim
+    root = trim
 
     # Move last element down until its in the right place
     bubble_down(0)
 
-    minimum
+    root
   end
 
   def bubble_down(index)
-    return if leaf?(index) || children(index).all >= @heap[index]
+    return if leaf?(index) ||
+      children(index).all { |child| correct?(@heap[index], child) }
 
     if left_child(index) <= right_child(index)
       destination_idx = Heap.left_child_index(index)
@@ -77,7 +80,7 @@ class MinHeap < Heap
 
   def bubble_up(index)
     # If node is greater than its parent, its in the right place
-    return if index == 0 || parent(index) <= @heap[index]
+    return if index == 0 || correct?(parent(index), @heap[index])
 
     # Else swap values, and try the next level
     parent_index = Heap.parent_index(index)
@@ -85,7 +88,16 @@ class MinHeap < Heap
     bubble_up(parent_index)
   end
 
-  def trim
-    @heap.pop
+end
+
+class MinHeap < Heap
+  def correct?(upper_node, lower_node)
+    upper_node <= lower_node
+  end
+end
+
+class MaxHeap < Heap
+  def correct?(upper_node, lower_node)
+    upper_node >= lower_node
   end
 end
