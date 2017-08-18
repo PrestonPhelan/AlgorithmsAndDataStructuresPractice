@@ -20,18 +20,22 @@ class DoublyLinkedListNode(object):
         self.next = None
 
     def __str__(self):
-        return value
+        return self.value
 
 # Linked List class
 class DoublyLinkedList(object):
     def __init__(self):
         self.head = DoublyLinkedListNode()
-        self.tail = self.head
+        self.tail = DoublyLinkedListNode("TAIL")
+        self.head.next = self.tail
+        self.tail.prev = self.head
 
     def add(self, node):
-        self.tail.next = node
-        node.prev = self.tail
-        self.tail = node
+        node.prev = self.tail.prev
+        self.tail.prev.next = node
+
+        self.tail.prev = node
+        node.next = self.tail
 
     def remove(self, node):
         node.next.prev = node.prev
@@ -44,6 +48,9 @@ class DoublyLinkedList(object):
         node = self.head.next
         self.remove(node)
         return node
+
+    def isEmpty(self):
+        return self.head.next is self.tail
 
     def __str__(self):
         currentNode = self.head
@@ -135,6 +142,25 @@ class ShelterQueue:
         else:
             self.dogQueue.enqueue(newNode)
 
+    def dequeueAny(self):
+        if self.isEmpty():
+            print "No animals available to adopt"
+            return None
+        else:
+            animal = self.anyQueue.take()
+            if animal.species == "cat":
+                self.catQueue.dequeue()
+            else:
+                self.dogQueue.dequeue()
+            return animal
+
+    def isEmpty(self):
+        return self.anyQueue.isEmpty()
+
+
+
+
+## TESTING AREA
 x = ShelterQueue()
 x.enqueue("Rufus", "dog")
 x.enqueue("Mittens", "cat")
@@ -144,3 +170,21 @@ x.enqueue("Colonel Whiskers", "cat")
 print x
 print x.catQueue
 print x.dogQueue
+
+print x.dequeueAny()
+print x
+
+print x.dequeueAny()
+print x
+
+print x.dequeueAny()
+print x
+
+print x.dequeueAny()
+print x
+
+print x.dequeueAny()
+print x
+
+print x.dequeueAny()
+print x
