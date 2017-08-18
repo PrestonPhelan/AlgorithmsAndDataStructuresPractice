@@ -28,11 +28,10 @@ class DoublyLinkedList(object):
         self.head = DoublyLinkedListNode()
         self.tail = self.head
 
-    def add(self, value):
-        newNode = DoublyLinkedListNode(value)
-        self.tail.next = newNode
-        newNode.prev = self.tail
-        self.tail = newNode
+    def add(self, node):
+        self.tail.next = node
+        node.prev = self.tail
+        self.tail = node
 
     def remove(self, node):
         node.next.prev = node.prev
@@ -106,22 +105,42 @@ class Queue(object):
 
 
 ## Shelter Classes
-# ShelterQueue
-
 # AnimalNode
+class AnimalNode(DoublyLinkedListNode):
+    def __init__(self, name, species):
+        if species.lower() in ["cat", "dog"]:
+            super(AnimalNode, self).__init__(name)
+            self.species = species.lower()
+        else:
+            raise Exception("Not a valid species")
 
-x = Queue()
-x.enqueue("a")
-x.enqueue("b")
-x.enqueue("c")
+# ShelterQueue
+class ShelterQueue:
+    def __init__(self):
+        self.anyQueue = DoublyLinkedList()
+        self.catQueue = Queue()
+        self.dogQueue = Queue()
+
+    def __str__(self):
+        return self.anyQueue.__str__()
+
+    def enqueue(self, name, species):
+        newNode = AnimalNode(name, species)
+        # Adds to any queue, O(1)
+        self.anyQueue.add(newNode)
+
+        # Adds to species specific queue, O(1)
+        if species == "cat":
+            self.catQueue.enqueue(newNode)
+        else:
+            self.dogQueue.enqueue(newNode)
+
+x = ShelterQueue()
+x.enqueue("Rufus", "dog")
+x.enqueue("Mittens", "cat")
+x.enqueue("Spot", "dog")
+x.enqueue("Colonel Whiskers", "cat")
 
 print x
-
-x.dequeue()
-
-print x
-
-x.enqueue("d")
-x.dequeue()
-
-print x
+print x.catQueue
+print x.dogQueue
