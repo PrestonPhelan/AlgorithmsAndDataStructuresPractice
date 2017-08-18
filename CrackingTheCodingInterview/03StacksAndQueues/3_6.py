@@ -49,6 +49,9 @@ class DoublyLinkedList(object):
         self.remove(node)
         return node
 
+    def peek(self):
+        return self.head.next
+
     def isEmpty(self):
         return self.head.next is self.tail
 
@@ -108,6 +111,11 @@ class Queue(object):
 
     def isEmpty(self):
         return self.inbox.isEmpty() and self.outbox.isEmpty()
+
+    def peek(self):
+        if self.outbox.isEmpty():
+            self.flipStacks()
+        return self.outbox.peek()
 
     def __str__(self):
         return "In: " + self.inbox.__str__() + "\nOut: " + self.outbox.__str__()
@@ -177,6 +185,18 @@ class ShelterQueue:
             self.anyQueue.remove(dog)
             return dog
 
+    def peek(self):
+        animal = self.anyQueue.peek()
+        return [animal.value, animal.species]
+
+    def peekCat(self):
+        cat = self.catQueue.peek()
+        return cat.value
+
+    def peekDog(self):
+        dog = self.dogQueue.peek()
+        return dog.value
+
     def isEmpty(self):
         return self.anyQueue.isEmpty()
 
@@ -197,8 +217,6 @@ print x.dogQueue
 print x.dequeueDog()
 print x
 
-print x.dequeueDog()
-print x
-
-print x.dequeueDog()
-print x
+print x.peek()
+print x.peekCat()
+print x.peekDog()
