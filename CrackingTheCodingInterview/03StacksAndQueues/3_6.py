@@ -204,19 +204,19 @@ class ShelterQueue:
 
 
 ## TESTING AREA
-x = ShelterQueue()
-x.enqueue("Rufus", "dog")
-x.enqueue("Mittens", "cat")
-x.enqueue("Spot", "dog")
-x.enqueue("Colonel Whiskers", "cat")
-
-print x
-print x.catQueue
-print x.dogQueue
-
-print x.dequeueDog()
-print x
-
-print x.peek()
-print x.peekCat()
-print x.peekDog()
+# x = ShelterQueue()
+# x.enqueue("Rufus", "dog")
+# x.enqueue("Mittens", "cat")
+# x.enqueue("Spot", "dog")
+# x.enqueue("Colonel Whiskers", "cat")
+#
+# print x
+# print x.catQueue
+# print x.dogQueue
+#
+# print x.dequeueDog()
+# print x
+#
+# print x.peek()
+# print x.peekCat()
+# print x.peekDog()
