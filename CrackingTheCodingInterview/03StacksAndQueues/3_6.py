@@ -168,6 +168,14 @@ class ShelterQueue:
             return cat
 
     # dequeueDog
+    def dequeueDog(self):
+        if self.dogQueue.isEmpty():
+            print "No dogs available to adopt"
+            return None
+        else:
+            dog = self.dogQueue.dequeue()
+            self.anyQueue.remove(dog)
+            return dog
 
     def isEmpty(self):
         return self.anyQueue.isEmpty()
@@ -186,11 +194,11 @@ print x
 print x.catQueue
 print x.dogQueue
 
-print x.dequeueCat()
+print x.dequeueDog()
 print x
 
-print x.dequeueCat()
+print x.dequeueDog()
 print x
 
-print x.dequeueCat()
+print x.dequeueDog()
 print x
