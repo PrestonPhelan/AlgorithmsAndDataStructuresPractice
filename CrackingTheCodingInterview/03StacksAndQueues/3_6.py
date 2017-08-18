@@ -44,12 +44,16 @@ class ShelterQueue(LinkedList):
         toAdopt.next = None
         return toAdopt
 
-    def isEmpty():
+    def isEmpty(self):
         return self.head.next is None
 
 x = ShelterQueue()
 x.enqueue("Rufus", "dog")
 print x
 
+print x.isEmpty()
+
 print x.adoptAny()
 print x
+
+print x.isEmpty()
