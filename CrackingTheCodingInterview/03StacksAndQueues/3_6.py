@@ -38,7 +38,18 @@ class ShelterQueue(LinkedList):
         self.tail = newNode
         return newNode
 
+    def adoptAny(self):
+        toAdopt = self.head.next
+        self.head.next = toAdopt.next
+        toAdopt.next = None
+        return toAdopt
+
+    def isEmpty():
+        return self.head.next is None
 
 x = ShelterQueue()
 x.enqueue("Rufus", "dog")
+print x
+
+print x.adoptAny()
 print x
