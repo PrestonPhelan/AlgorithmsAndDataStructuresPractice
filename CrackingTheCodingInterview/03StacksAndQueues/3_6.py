@@ -39,10 +39,14 @@ class ShelterQueue(LinkedList):
         return newNode
 
     def adoptAny(self):
-        toAdopt = self.head.next
-        self.head.next = toAdopt.next
-        toAdopt.next = None
-        return toAdopt
+        if self.isEmpty():
+            print "No animals available for adoption"
+            return None
+        else:
+            toAdopt = self.head.next
+            self.head.next = toAdopt.next
+            toAdopt.next = None
+            return toAdopt
 
     def isEmpty(self):
         return self.head.next is None
@@ -57,3 +61,5 @@ print x.adoptAny()
 print x
 
 print x.isEmpty()
+
+print x.adoptAny()
