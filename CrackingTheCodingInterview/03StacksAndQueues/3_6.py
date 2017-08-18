@@ -106,6 +106,9 @@ class Queue(object):
             self.outbox.add(self.inbox.take())
         return True
 
+    def isEmpty(self):
+        return self.inbox.isEmpty() and self.outbox.isEmpty()
+
     def __str__(self):
         return "In: " + self.inbox.__str__() + "\nOut: " + self.outbox.__str__()
 
@@ -154,6 +157,18 @@ class ShelterQueue:
                 self.dogQueue.dequeue()
             return animal
 
+    # dequeueCat
+    def dequeueCat(self):
+        if self.catQueue.isEmpty():
+            print "No cats available to adopt"
+            return None
+        else:
+            cat = self.catQueue.dequeue()
+            self.anyQueue.remove(cat)
+            return cat
+
+    # dequeueDog
+
     def isEmpty(self):
         return self.anyQueue.isEmpty()
 
@@ -171,20 +186,11 @@ print x
 print x.catQueue
 print x.dogQueue
 
-print x.dequeueAny()
+print x.dequeueCat()
 print x
 
-print x.dequeueAny()
+print x.dequeueCat()
 print x
 
-print x.dequeueAny()
-print x
-
-print x.dequeueAny()
-print x
-
-print x.dequeueAny()
-print x
-
-print x.dequeueAny()
+print x.dequeueCat()
 print x
