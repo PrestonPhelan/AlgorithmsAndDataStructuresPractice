@@ -59,8 +59,50 @@ class DoublyLinkedList(object):
 
 
 # Stack class
+class Stack(object):
+    # A basic stack
+    def __init__(self):
+        self.stack = []
+
+    def add(self, element):
+        self.stack.append(element)
+        return element
+
+    def take(self):
+        return self.stack.pop()
+
+    def peek(self):
+        return self.stack[-1]
+
+    def isEmpty(self):
+        return not self.stack
+
+    def __str__(self):
+        return self.stack.__str__()
 
 # Queue class
+class Queue(object):
+    def __init__(self):
+        self.inbox = Stack()
+        self.outbox = Stack()
+
+    def enqueue(self, element):
+        self.inbox.add(element)
+        return element
+
+    def dequeue(self):
+        if self.outbox.isEmpty():
+            self.flipStacks()
+        return self.outbox.take()
+
+    def flipStacks(self):
+        while not self.inbox.isEmpty():
+            self.outbox.add(self.inbox.take())
+        return True
+
+    def __str__(self):
+        return "In: " + self.inbox.__str__() + "\nOut: " + self.outbox.__str__()
+
 
 
 ## Shelter Classes
@@ -68,12 +110,18 @@ class DoublyLinkedList(object):
 
 # AnimalNode
 
-x = DoublyLinkedList()
-x.add("test")
-x.add("more stuff")
+x = Queue()
+x.enqueue("a")
+x.enqueue("b")
+x.enqueue("c")
 
 print x
 
-x.take()
+x.dequeue()
+
+print x
+
+x.enqueue("d")
+x.dequeue()
 
 print x
