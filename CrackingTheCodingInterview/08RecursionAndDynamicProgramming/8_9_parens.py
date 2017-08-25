@@ -1,3 +1,5 @@
+from collections import Counter
+
 # Main function - input integer, output permutations as an array
 def parens(n):
     if n <= 0:
@@ -23,3 +25,11 @@ def get_next_parens(perms):
     return result
 
 # Take single n-permutation, produce n + 1 permutations as an array
+def get_n_plus_1_perms(perm):
+    result = []
+    result.append("(" + perm + ")")
+    result.append(perm + "()")
+    if perm[-2:] != "()":
+        result.append("()" + perm)
+
+    return result
